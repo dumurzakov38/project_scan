@@ -32,7 +32,7 @@ button {
 
 button:not([disabled]):hover {
   transform: translateZ(10px);
-  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.4);
+  /* box-shadow: 0 0px 20px rgba(0, 0, 0, 0.4); */
 }
 
 * {
@@ -1823,9 +1823,12 @@ footer {
 
 .result__container__content--summary__container--containerSlider__container--slider__containerSlider__containerSlides__slide {
   text-align: center;
-  border-right: 2px solid rgba(148, 148, 148, 0.4);
   padding: 0px 19px;
   box-sizing: border-box;
+}
+
+.result__container__content--summary__container--containerSlider__container--slider__containerSlider__containerSlides__slide:not(:last-child) {
+  border-right: 2px solid rgba(148, 148, 148, 0.4);
 }
 
 

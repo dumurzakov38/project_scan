@@ -1,7 +1,7 @@
 export function getYears(params) {
-    const date = new Date();
+  const date = new Date();
 
-    const year = date.getFullYear();
+  const year = date.getFullYear();
 
-    return year;
+  return year;
 }
