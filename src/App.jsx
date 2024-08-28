@@ -14,8 +14,6 @@ import { userInfo } from './components/scripts/userInfo';
 
 function PrivateRoute({ element, ...props }) {
   const accessToken = localStorage.getItem('accessToken');
-
-  // Проверка аутентификации пользователя
   const isLoggedIn = accessToken !== "" && accessToken !== null;
 
   return isLoggedIn ? element : <Navigate to="/" />;
@@ -51,7 +49,6 @@ function App() {
           <Route path="/" element={<Main userIsAuthorized={userIsAuthorized}/>} />
           <Route path="*" element={<Section_notFound />} />
           <Route path="/login" element={<Section_authorizationForm />} />
-          {/* Защищаем маршруты с помощью PrivateRoute */}
           <Route path="/search" element={<PrivateRoute element={<Section_search />} />} />
         </Routes>
         <Footer />
