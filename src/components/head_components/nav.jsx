@@ -6,6 +6,7 @@ import avatar_scan from "../../img/avatar_scan.jpg";
 import loader_scan from "../../img/loader_scan.svg";
 import menuBurgerOpen from "../../img/menuBurgerOpen.svg";
 import menuBurgerClose from "../../img/menuBurgerClose.svg";
+import { userInfo } from "../scripts/userInfo";
 
 import { navFunction } from "./components/navFunction";
 
@@ -64,6 +65,8 @@ export function Nav(props) {
     localStorage.removeItem("expire");
     sessionStorage.removeItem("usedCompanyCount");
     sessionStorage.removeItem("companyLimit");
+
+    userInfo();
   };
 
   return (
@@ -101,7 +104,7 @@ export function Nav(props) {
             </div>
           </div>
           <div className="nav__btn--user">
-            {props.prop ? (
+            {props.prop === true ? (
               <>
                 <div
                   className="nav__btn--user__info--container"

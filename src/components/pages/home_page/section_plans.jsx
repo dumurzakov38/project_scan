@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card_tariff } from "./components/card_tariff";
 
-export function Section_plans(params) {
-  const tariffData = JSON.parse(localStorage.getItem("tariff"));
+export function Section_plans(userIsAuthorized) {
+  const [tariffData, setTariffData] = useState(() => {
+    const storedTariff = localStorage.getItem("tariff");
+    return storedTariff ? JSON.parse(storedTariff) : [];
+  });
+
+  useEffect(() => {
+    const storedTariff = localStorage.getItem("tariff");
+    if (storedTariff) {
+      setTariffData(JSON.parse(storedTariff));
+    } else {
+      setTariffData([]);
+    }
+  }, [userIsAuthorized]);
+
   let tariffs = [];
 
   for (let i = 0; i < tariffData.length; i++) {
@@ -34,15 +47,21 @@ export function Section_plans(params) {
   }
 
   return (
-    <section className="content section__tariff">
-      <div className="section__tariff--h1">
-        <h1>наши тарифы</h1>
-      </div>
-      <div className="section__tariff--slider">
-        <div className="section__tariff--slider__container">
-          <Card_tariff props={tariffs} />
-        </div>
-      </div>
-    </section>
+    <>
+      {tariffData ? (
+        <section className="content section__tariff">
+          <div className="section__tariff--h1">
+            <h1>наши тарифы</h1>
+          </div>
+          <div className="section__tariff--slider">
+            <div className="section__tariff--slider__container">
+              <Card_tariff props={tariffs} />
+            </div>
+          </div>
+        </section>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }

@@ -21,9 +21,7 @@ function PrivateRoute({ element, ...props }) {
 
 function App() {
   validToken();
-  userInfo();
-  const [userIsAuthorized, setUserIsAuthorized] = useState(false);
-  processingData_GetUserLimit();
+  const [userIsAuthorized, setUserIsAuthorized] = useState();
 
   function userAuthorized() {
     const accessToken = localStorage.getItem('accessToken');
@@ -39,6 +37,8 @@ function App() {
     setInterval(() => {
       userAuthorized();
     }, 100);
+    userInfo();
+    processingData_GetUserLimit();
   }, []);
 
   return (

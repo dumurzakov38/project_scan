@@ -954,7 +954,7 @@ footer {
 .authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputLoginAndPhone, .authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputPassword {
   position: relative;
 }
-.authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputLoginAndPhone--Input--err, .authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputPassword--Input--err {
+.authorizationForm__container__content--form--contaainerAuthorizationForm--containerInValidValues--err {
   display: none;
   position: absolute;
   margin-left: auto;
@@ -991,6 +991,7 @@ footer {
 
 .authorizationForm__container__content--form--contaainerAuthorizationForm--containerRestorePassword {
   margin-top: 15px;
+  text-align: center;
 }
 
 .authorizationForm__container__content--form--contaainerAuthorizationForm--containerRestorePassword__btn {

@@ -9,7 +9,7 @@ export function Main({ userIsAuthorized }) {
       <Header userIsAuthorized={userIsAuthorized} />
       <main>
         <Section_whyUs />
-        <Section_plans />
+        <Section_plans userIsAuthorized={userIsAuthorized} />
       </main>
     </>
   );

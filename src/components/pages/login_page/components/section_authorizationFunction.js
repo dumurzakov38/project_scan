@@ -10,11 +10,8 @@ export function authorizationFunction(navigate) {
     inputPassword = document.querySelector(
       ".authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputPassword--Input"
     ),
-    inputLoginErr = document.querySelector(
-      ".authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputLoginAndPhone--Input--err"
-    ),
     inputPasswordErr = document.querySelector(
-      ".authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputPassword--Input--err"
+      ".authorizationForm__container__content--form--contaainerAuthorizationForm--containerInValidValues--err"
     ),
     formBtnSubmit = document.querySelector(
       ".authorizationForm__container__content--form--contaainerAuthorizationForm--containerButtonSubmit__btn"
@@ -22,23 +19,37 @@ export function authorizationFunction(navigate) {
 
   let btnDisebeld = true;
 
+  function renderErrMess(err, errAllValues) {
+    if (err === true) {
+      inputLogin.style.border = "1px solid #FF5959";
+      inputLogin.style.color = "#FF5959";
+      inputPasswordErr.style.display = "block";
+    } else {
+      inputLogin.style.border = "1px solid #C7C7C7";
+      inputLogin.style.color = "";
+      inputPasswordErr.style.display = "none";
+    }
+
+    if (errAllValues === true) {
+      inputPassword.style.border = "1px solid #FF5959";
+      inputPassword.style.color = "#FF5959";
+    } else {
+      inputPassword.style.border = "1px solid #C7C7C7";
+      inputPassword.style.color = "";
+    }
+  }
+
   function handleInput() {
     const input = inputLogin.value;
 
     if (input.charAt(0) === "+" && /^\+\d+$/.test(input)) {
-      inputLogin.style.border = "1px solid #C7C7C7";
-      inputLogin.style.color = "";
-      inputLoginErr.style.display = "none";
+      renderErrMess(false);
       btnDisebeld = false;
     } else if (input.charAt(0) === "+" && !/^\+\d+$/.test(input)) {
-      inputLogin.style.border = "1px solid #FF5959";
-      inputLogin.style.color = "#FF5959";
-      inputLoginErr.style.display = "block";
+      renderErrMess(true);
       btnDisebeld = true;
     } else {
-      inputLogin.style.border = "1px solid #C7C7C7";
-      inputLogin.style.color = "";
-      inputLoginErr.style.display = "none";
+      renderErrMess(false);
       btnDisebeld = false;
     }
   }
@@ -69,17 +80,23 @@ export function authorizationFunction(navigate) {
   });
 
   function authorization(params) {
-    const data = {
+    const userData = {
       loginNumber: inputLogin.value,
       password: inputPassword.value,
     };
 
-    processingData_Authorization(data);
+    return processingData_Authorization(userData, navigate);
   }
 
-  form.addEventListener("submit", function (event) {
-    event.preventDefault(); //
-    authorization();
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const responseQuery = await authorization();
+
+    if (responseQuery.errorCode === 401) {
+      renderErrMess(true, true);
+      return;
+    }
+
     form.reset();
     handleBtnSubmit();
     return "true";

@@ -115,6 +115,7 @@ export function Slider_results() {
               <Swiper
                 modules={[Pagination, Keyboard, Navigation, Mousewheel, A11y]}
                 slidesPerView={newsData.length !== 1 ? slidesPerView : 1}
+                centerInsufficientSlides={true}
                 mousewheel={{ invert: true }}
                 keyboard={{ enabled: true, onlyInViewport: false }}
                 ref={swiperRef}

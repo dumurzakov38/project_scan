@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { authorizationFunction } from "./components/section_authorizationFunction";
 
@@ -9,8 +10,10 @@ import facebook_icon from "../../../img/facebook_icon.svg";
 import yandex_icon from "../../../img/yandex_icon.svg";
 
 export function Section_authorizationForm(params) {
+  const navigate = useNavigate();
+
   useEffect(() => {
-    authorizationFunction();
+    authorizationFunction(navigate);
     window.scrollTo(0, 0);
   }, []);
 
@@ -73,11 +76,9 @@ export function Section_authorizationForm(params) {
                       type="text"
                       name="login_and_phone"
                       placeholder="Логин | +12345678910"
+                      autoComplete="login"
                       required
                     />
-                    <p className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputLoginAndPhone--Input--err">
-                      Введите корректные данные
-                    </p>
                   </div>
                   <div className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputPassword">
                     <label
@@ -94,8 +95,8 @@ export function Section_authorizationForm(params) {
                       autocomplete="current-password"
                       required
                     />
-                    <p className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputPassword--Input--err">
-                      Неправильный пароль
+                    <p className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerInValidValues--err">
+                      Неправильный Логин или Пароль
                     </p>
                   </div>
                   <div className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerButtonSubmit">
