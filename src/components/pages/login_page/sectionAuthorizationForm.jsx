@@ -1,5 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { setMessage } from "../../../store/messageSlice";
+import { clearMessage } from "../../../store/messageSlice";
 
 import { authorizationFunction } from "./components/sectionAuthorizationFunction";
 
@@ -17,6 +20,8 @@ export function SectionAuthorizationForm({ setUserIsAuthorized }) {
   const formBtnSubmitRef = useRef(null);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const message = useSelector((state) => state.message.message);
 
   useEffect(() => {
     authorizationFunction({
@@ -27,6 +32,10 @@ export function SectionAuthorizationForm({ setUserIsAuthorized }) {
       inputPasswordRef,
       inputPasswordErrRef,
       formBtnSubmitRef,
+      dispatch,
+      setMessage,
+      clearMessage,
+      message,
     });
     window.scrollTo(0, 0);
   }, []);
@@ -116,7 +125,7 @@ export function SectionAuthorizationForm({ setUserIsAuthorized }) {
                       ref={inputPasswordErrRef}
                       className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerInValidValues--err"
                     >
-                      Неправильный Логин или Пароль
+                      {message}
                     </p>
                   </div>
                   <div className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerButtonSubmit">

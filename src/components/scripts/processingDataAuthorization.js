@@ -5,6 +5,9 @@ export function processingDataAuthorization({
   userData,
   navigate,
   setUserIsAuthorized,
+  dispatch,
+  setMessage,
+  clearMessage,
 }) {
   let { loginNumber, password } = userData;
 
@@ -23,16 +26,16 @@ export function processingDataAuthorization({
   })
     .then((response) => {
       if (!response.ok) {
-        if (response.status !== "") {
+        return response.json().then((errorData) => {
+          dispatch(setMessage(errorData.message));
           return { errorCode: response.status };
-        }
-        throw new Error("Ошибка сети: " + response);
+        });
       }
       return response.json();
     })
     .then((data) => {
       if (data.errorCode) {
-        return data;
+        return { errorCode: data.errorCode };
       }
 
       localStorage.setItem("accessToken", data.accessToken);
@@ -41,6 +44,7 @@ export function processingDataAuthorization({
       userInfo();
 
       setUserIsAuthorized(true);
+      dispatch(clearMessage(""));
       navigate("/");
       processingDataGetUserLimit();
       return { success: true };

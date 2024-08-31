@@ -8,6 +8,9 @@ export function authorizationFunction({
   inputPasswordRef,
   inputPasswordErrRef,
   formBtnSubmitRef,
+  dispatch,
+  setMessage,
+  clearMessage,
 }) {
   const form = formRef.current;
   const inputLogin = inputLoginRef.current;
@@ -17,23 +20,11 @@ export function authorizationFunction({
 
   let btnDisebeld = true;
 
-  function renderErrMess(err, errAllValues) {
+  function renderErrMess(err) {
     if (err === true) {
-      inputLogin.style.border = "1px solid #FF5959";
-      inputLogin.style.color = "#FF5959";
       inputPasswordErr.style.display = "block";
     } else {
-      inputLogin.style.border = "1px solid #C7C7C7";
-      inputLogin.style.color = "";
       inputPasswordErr.style.display = "none";
-    }
-
-    if (errAllValues === true) {
-      inputPassword.style.border = "1px solid #FF5959";
-      inputPassword.style.color = "#FF5959";
-    } else {
-      inputPassword.style.border = "1px solid #C7C7C7";
-      inputPassword.style.color = "";
     }
   }
 
@@ -87,6 +78,9 @@ export function authorizationFunction({
       userData,
       navigate,
       setUserIsAuthorized,
+      dispatch,
+      setMessage,
+      clearMessage,
     });
   }
 
@@ -95,7 +89,7 @@ export function authorizationFunction({
     const responseQuery = await authorization();
 
     if (responseQuery.errorCode === 401) {
-      renderErrMess(true, true);
+      renderErrMess(true);
       return;
     }
 

@@ -5,6 +5,8 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { Provider } from 'react-redux';
+import store from './store';
 
 import { Nav } from "./components/head_components/nav";
 import { Footer } from "./components/footer_components/footer";
@@ -45,24 +47,26 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="App">
-        <Nav prop={userIsAuthorized} setUserIsAuthorized={setUserIsAuthorized} />
-        <Routes>
-          <Route
-            path="/"
-            element={<Main userIsAuthorized={userIsAuthorized} />}
-          />
-          <Route path="*" element={<SectionNotFound />} />
-          <Route path="/login" element={<SectionAuthorizationForm setUserIsAuthorized={setUserIsAuthorized}/>} />
-          <Route
-            path="/search"
-            element={<PrivateRoute element={<SectionSearch />} />}
-          />
-        </Routes>
-        <Footer />
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <div className="App">
+          <Nav prop={userIsAuthorized} setUserIsAuthorized={setUserIsAuthorized} />
+          <Routes>
+            <Route
+              path="/"
+              element={<Main userIsAuthorized={userIsAuthorized} />}
+            />
+            <Route path="*" element={<SectionNotFound />} />
+            <Route path="/login" element={<SectionAuthorizationForm setUserIsAuthorized={setUserIsAuthorized}/>} />
+            <Route
+              path="/search"
+              element={<PrivateRoute element={<SectionSearch />} />}
+            />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
+    </Provider>
   );
 }
 
