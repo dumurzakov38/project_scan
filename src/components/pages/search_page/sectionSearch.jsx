@@ -1,20 +1,70 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
-import { searchFunction } from "./components/section_searchFunction";
-import { Section_results } from "../results_page/section_results";
+import { searchFunction } from "./components/sectionSearchFunction";
+import { SectionResults } from "../results_page/sectionResults";
 
 import bg_section_search_document_scan from "../../../img/bg_section_search_document_scan.svg";
 import bg_section_search_folders_scan from "../../../img/bg_section_search_folders_scan.svg";
 import bg_section_search_scan from "../../../img/bg_section_search_scan.svg";
 
-export function Section_search(params) {
+export function SectionSearch() {
   const [renderResults, setRenderResults] = useState(false);
+  const formRef = useRef(null);
+  const formBtnSubmitRef = useRef(null);
+  const inputFormRef = useRef(null);
+  const inputInnRef = useRef(null);
+  const selectToneRef = useRef(null);
+  const inputQuantityInIssueRef = useRef(null);
+  const inputDateRange1Ref = useRef(null);
+  const inputDateRange2Ref = useRef(null);
+  const markerErrInnRef = useRef(null);
+  const markerErrDateRangeRef = useRef(null);
+  const messageErrInnRef = useRef(null);
+  const messageErrDateRangeRef = useRef(null);
+  const allcheckboxRef = useRef([]);
 
   useEffect(() => {
-    searchFunction([renderResults, setRenderResults]);
+    if (
+      formRef.current &&
+      formBtnSubmitRef.current &&
+      inputFormRef.current &&
+      inputInnRef.current &&
+      selectToneRef.current &&
+      inputQuantityInIssueRef.current &&
+      inputDateRange1Ref.current &&
+      inputDateRange2Ref.current &&
+      markerErrInnRef.current &&
+      markerErrDateRangeRef.current &&
+      messageErrInnRef.current &&
+      messageErrDateRangeRef.current &&
+      allcheckboxRef.current
+    ) {
+      searchFunction(
+        setRenderResults,
+        formRef,
+        formBtnSubmitRef,
+        inputFormRef,
+        inputInnRef,
+        selectToneRef,
+        inputQuantityInIssueRef,
+        inputDateRange1Ref,
+        inputDateRange2Ref,
+        markerErrInnRef,
+        markerErrDateRangeRef,
+        messageErrInnRef,
+        messageErrDateRangeRef,
+        allcheckboxRef
+      );
+    }
     window.scrollTo(0, 0);
-  }, []);
+  }, [!renderResults === false]);
+
+  const setCheckboxRef = (el) => {
+    if (el && !allcheckboxRef.current.includes(el)) {
+      allcheckboxRef.current.push(el);
+    }
+  };
 
   return [
     !renderResults ? (
@@ -50,21 +100,29 @@ export function Section_search(params) {
               <div className="search__container__content--main">
                 <div className="search__container__content--main--form">
                   <form
+                    ref={formRef}
                     className="search__container__content--main--form--FORM"
                     method="post"
                     action="/asd"
                   >
                     <div className="search__container__content--main--form__container">
-                      <div className="search__container__content--main--form__container--input">
+                      <div
+                        ref={inputFormRef}
+                        className="search__container__content--main--form__container--input"
+                      >
                         <div className="search__container__content--main--form__container--input__container--inn">
                           <label className="search__container__content--main--form__container--input__container--inn--label">
                             ИНН компании
-                            <p className="search__container__content--main--form__container--input__container--inn--label__symbol">
+                            <p
+                              ref={markerErrInnRef}
+                              className="search__container__content--main--form__container--input__container--inn--label__symbol"
+                            >
                               *
                             </p>
                           </label>
                           <div className="search__container__content--main--form__container--input__container--errContainer">
                             <input
+                              ref={inputInnRef}
                               className="search__container__content--main--form__container--input__container--inn--input"
                               type="text"
                               placeholder="10 цифр"
@@ -73,7 +131,10 @@ export function Section_search(params) {
                               required
                             />
                             <div className="search__container__content--main--form__container--input__container--errContainer--p">
-                              <p className="search__container__content--main--form__container--input__container--inn--input--err">
+                              <p
+                                ref={messageErrInnRef}
+                                className="search__container__content--main--form__container--input__container--inn--input--err"
+                              >
                                 Введите корректные данные
                               </p>
                             </div>
@@ -83,7 +144,10 @@ export function Section_search(params) {
                           <label className="search__container__content--main--form__container--input__container--tone--label">
                             Тональность
                           </label>
-                          <select className="search__container__content--main--form__container--input__container--tone--select">
+                          <select
+                            ref={selectToneRef}
+                            className="search__container__content--main--form__container--input__container--tone--select"
+                          >
                             <option value="any" selected>
                               Любая
                             </option>
@@ -100,6 +164,7 @@ export function Section_search(params) {
                           </label>
                           <div className="search__container__content--main--form__container--input__container--errContainer">
                             <input
+                              ref={inputQuantityInIssueRef}
                               className="search__container__content--main--form__container--input__container--quantityInIssue--input quantityAsaResult"
                               type="text"
                               placeholder="От 1 до 1000"
@@ -115,25 +180,33 @@ export function Section_search(params) {
                         <div className="search__container__content--main--form__container--input__container--dateRange">
                           <label className="search__container__content--main--form__container--input__container--dateRange--label">
                             Диапазон поиска
-                            <p className="search__container__content--main--form__container--input__container--dateRange--label__symbol">
+                            <p
+                              ref={markerErrDateRangeRef}
+                              className="search__container__content--main--form__container--input__container--dateRange--label__symbol"
+                            >
                               *
                             </p>
                           </label>
                           <div className="search__container__content--main--form__container--input__container--errContainer search__container__content--main--form__container--input__container--errContainer__dateRange">
                             <input
+                              ref={inputDateRange1Ref}
                               className="search__container__content--main--form__container--input__container--dateRange--input1"
                               type="date"
                               title="Дата начала поиска"
                               required
                             />
                             <input
+                              ref={inputDateRange2Ref}
                               className="search__container__content--main--form__container--input__container--dateRange--input2"
                               type="date"
                               title="Дата конца поиска"
                               required
                             />
                             <div className="search__container__content--main--form__container--input__container--errContainer--p">
-                              <p className="search__container__content--main--form__container--input__container--dateRange--input--err">
+                              <p
+                                ref={messageErrDateRangeRef}
+                                className="search__container__content--main--form__container--input__container--dateRange--input--err"
+                              >
                                 Введите корректные данные
                               </p>
                             </div>
@@ -147,6 +220,7 @@ export function Section_search(params) {
                               className="search__container__content--main--form__container--checkbox--containerCheckbox__container--input"
                               type="checkbox"
                               data-info="maxFullness"
+                              ref={setCheckboxRef}
                             />
                             <span class="checkmark"></span>
                             <p className="search__container__content--main--form__container--checkbox--containerCheckbox__container--p maxFullness">
@@ -158,6 +232,7 @@ export function Section_search(params) {
                               className="search__container__content--main--form__container--checkbox--containerCheckbox__container--input"
                               type="checkbox"
                               data-info="inBusinessNews"
+                              ref={setCheckboxRef}
                             />
                             <span class="checkmark"></span>
                             <p className="search__container__content--main--form__container--checkbox--containerCheckbox__container--p inBusinessNews">
@@ -169,6 +244,7 @@ export function Section_search(params) {
                               className="search__container__content--main--form__container--checkbox--containerCheckbox__container--input"
                               type="checkbox"
                               data-info="onlyMainRole"
+                              ref={setCheckboxRef}
                             />
                             <span class="checkmark"></span>
                             <p className="search__container__content--main--form__container--checkbox--containerCheckbox__container--p onlyMainRole">
@@ -180,6 +256,7 @@ export function Section_search(params) {
                               className="search__container__content--main--form__container--checkbox--containerCheckbox__container--input"
                               type="checkbox"
                               data-info="riskFactors"
+                              ref={setCheckboxRef}
                             />
                             <span class="checkmark"></span>
                             <p className="search__container__content--main--form__container--checkbox--containerCheckbox__container--p riskFactors">
@@ -191,6 +268,7 @@ export function Section_search(params) {
                               className="search__container__content--main--form__container--checkbox--containerCheckbox__container--input"
                               type="checkbox"
                               data-info="isTechNews"
+                              ref={setCheckboxRef}
                             />
                             <span class="checkmark"></span>
                             <p className="search__container__content--main--form__container--checkbox--containerCheckbox__container--p isTechNews">
@@ -202,6 +280,7 @@ export function Section_search(params) {
                               className="search__container__content--main--form__container--checkbox--containerCheckbox__container--input"
                               type="checkbox"
                               data-info="isAnnouncement"
+                              ref={setCheckboxRef}
                             />
                             <span class="checkmark"></span>
                             <p className="search__container__content--main--form__container--checkbox--containerCheckbox__container--p isAnnouncement">
@@ -213,6 +292,7 @@ export function Section_search(params) {
                               className="search__container__content--main--form__container--checkbox--containerCheckbox__container--input"
                               type="checkbox"
                               data-info="isDigest"
+                              ref={setCheckboxRef}
                             />
                             <span class="checkmark"></span>
                             <p className="search__container__content--main--form__container--checkbox--containerCheckbox__container--p isDigest">
@@ -225,6 +305,7 @@ export function Section_search(params) {
                             <div className="search__container__content--main--form__container--checkbox--containerButton__container__content">
                               <div className="search__container__content--main--form__container--checkbox--containerButton__container__content--btnContainer">
                                 <button
+                                  ref={formBtnSubmitRef}
                                   className="search__container__content--main--form__container--checkbox--containerButton__container__content--btnContainer__btn"
                                   title="Поиск"
                                   disabled="true"
@@ -257,7 +338,7 @@ export function Section_search(params) {
         </section>
       </main>
     ) : (
-      <Section_results />
+      <SectionResults />
     ),
   ];
 }

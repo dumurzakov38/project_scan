@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export function Card_tariff(props) {
+export function CardTariff(props) {
   const tariffsContent = props.props.map((tariff, index) => {
     const {
       tariff_header,
@@ -144,25 +144,27 @@ export function Card_tariff(props) {
                   ))}
                 </ul>
               </div>
-              {active_tariff ? (
-                <Link to="/nan">
-                  <Tariff_container_content_btn
-                    className="section__tariff--slider__container__cart__content--main--btn tariffBtnPersonalArea"
-                    title="Перейти в личный кабинет"
-                  >
-                    Перейти в личный кабинет
-                  </Tariff_container_content_btn>
-                </Link>
-              ) : (
-                <Link to="/nan">
-                  <Tariff_container_content_btn
-                    className="section__tariff--slider__container__cart__content--main--btn tariffBtndetails"
-                    title="Подробнее"
-                  >
-                    Подробнее
-                  </Tariff_container_content_btn>
-                </Link>
-              )}
+              <div className="section__tariff--slider__container__cart__content--main--btn--container">
+                {active_tariff ? (
+                  <Link to="/nan">
+                    <Tariff_container_content_btn
+                      className="section__tariff--slider__container__cart__content--main--btn tariffBtnPersonalArea"
+                      title="Перейти в личный кабинет"
+                    >
+                      Перейти в личный кабинет
+                    </Tariff_container_content_btn>
+                  </Link>
+                ) : (
+                  <Link to="/nan">
+                    <Tariff_container_content_btn
+                      className="section__tariff--slider__container__cart__content--main--btn tariffBtndetails"
+                      title="Подробнее"
+                    >
+                      Подробнее
+                    </Tariff_container_content_btn>
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </div>

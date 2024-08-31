@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import logo_scan from "../../img/logo_scan.svg";
 import logo_scan_white_opacity from "../../img/logo_scan_white_opacity.svg";
 import avatar_scan from "../../img/avatar_scan.jpg";
@@ -10,15 +12,26 @@ import { userInfo } from "../scripts/userInfo";
 
 import { navFunction } from "./components/navFunction";
 
-export function Nav(props) {
+export function Nav({ prop, setUserIsAuthorized }) {
   const [userLimitInfo, setUserLimitInfo] = useState(false);
   const elementRef = useRef(null);
 
+  const numberОfUsedRef = useRef(null);
+  const valueTotalRef = useRef(null);
+  const userNameRef = useRef(null);
+  const userAvatarRef = useRef(null);
+
   useEffect(() => {
     if (elementRef.current) {
-      navFunction(userLimitInfo, setUserLimitInfo);
+      navFunction(
+        setUserLimitInfo,
+        numberОfUsedRef,
+        valueTotalRef,
+        userNameRef,
+        userAvatarRef
+      );
     }
-  }, [props.prop]);
+  }, [prop]);
 
   useEffect(() => {
     const openMenu = document.querySelector("#openMenu");
@@ -60,6 +73,7 @@ export function Nav(props) {
 
   const logOutOfAccount = () => {
     setUserLimitInfo(false);
+    setUserIsAuthorized(false);
 
     localStorage.removeItem("accessToken");
     localStorage.removeItem("expire");
@@ -104,7 +118,11 @@ export function Nav(props) {
             </div>
           </div>
           <div className="nav__btn--user">
-            {props.prop === true ? (
+            {prop === undefined ? (
+              <div className="nav__btn--user__loader--container">
+                <Skeleton variant="rounded" height={60} />
+              </div>
+            ) : prop === true ? (
               <>
                 <div
                   className="nav__btn--user__info--container"
@@ -125,7 +143,10 @@ export function Nav(props) {
                           </p>
                         </div>
                         <div className="nav__btn--user__info--container__limit--number__container">
-                          <p className="nav__btn--user__info--container__limit--number__container--numberОfUsed"></p>
+                          <p
+                            ref={numberОfUsedRef}
+                            className="nav__btn--user__info--container__limit--number__container--numberОfUsed"
+                          ></p>
                         </div>
                       </div>
                       <div className="nav__btn--user__info--container__limit--valueTotal">
@@ -135,7 +156,10 @@ export function Nav(props) {
                           </p>
                         </div>
                         <div className="nav__btn--user__info--container__limit--number__container">
-                          <p className="nav__btn--user__info--container__limit--number__container--valueTotal"></p>
+                          <p
+                            ref={valueTotalRef}
+                            className="nav__btn--user__info--container__limit--number__container--valueTotal"
+                          ></p>
                         </div>
                       </div>
                     </div>
@@ -160,13 +184,13 @@ export function Nav(props) {
                 </div>
                 <div className="nav__btn--user__info--container__profile">
                   <div className="nav__btn--user__info--container__profile--text">
-                    <p></p>
+                    <p ref={userNameRef}></p>
                     <button title="выйти" onClick={logOutOfAccount}>
                       Выйти
                     </button>
                   </div>
                   <div className="nav__btn--user__info--container__profile--img">
-                    <img />
+                    <img ref={userAvatarRef} />
                   </div>
                 </div>
               </>

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Slider_results } from "./components/slider_results";
+import { SliderResults } from "./components/sliderResults";
 import { RenderNews } from "./components/renderNews";
 import { NumberOfOptions } from "./components/numberOfOptions";
-import { processingData_GetPublications } from "../../scripts/processingData_GetPublications";
+import { processingDataGetPublications } from "../../scripts/processingDataGetPublications";
 
 import bg_section_results from "../../../img/bg_section_results.svg";
 
-export function Section_results(params) {
+export function SectionResults() {
   const [renderNews, setRenderNews] = useState(false);
   const [renderBtnLoadMore, setRenderBtnLoadMore] = useState(true);
 
@@ -36,7 +36,7 @@ export function Section_results(params) {
   }, []);
 
   const handleClick = () => {
-    processingData_GetPublications("lazy");
+    processingDataGetPublications("lazy");
   };
 
   return (
@@ -61,7 +61,7 @@ export function Section_results(params) {
                   Общая сводка
                 </h4>
                 <NumberOfOptions />
-                <Slider_results />
+                <SliderResults />
               </div>
             </div>
             <div className="result__container__content--documentation">

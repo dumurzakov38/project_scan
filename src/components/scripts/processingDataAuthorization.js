@@ -1,7 +1,11 @@
-import { processingData_GetUserLimit } from "./processingData_GetUserLimit";
-import { userInfo } from "../scripts/userInfo";
+import { processingDataGetUserLimit } from "./processingDataGetUserLimit";
+import { userInfo } from "./userInfo";
 
-export function processingData_Authorization(userData, navigate) {
+export function processingDataAuthorization({
+  userData,
+  navigate,
+  setUserIsAuthorized,
+}) {
   let { loginNumber, password } = userData;
 
   let data = {
@@ -36,8 +40,9 @@ export function processingData_Authorization(userData, navigate) {
 
       userInfo();
 
+      setUserIsAuthorized(true);
       navigate("/");
-      processingData_GetUserLimit();
+      processingDataGetUserLimit();
       return { success: true };
     })
     .catch((error) => {

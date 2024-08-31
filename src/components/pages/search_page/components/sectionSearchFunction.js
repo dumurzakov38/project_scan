@@ -1,50 +1,39 @@
 import { event } from "jquery";
-import { processingData_SerchPublications } from "../../../scripts/processingData_SerchPublications";
-import { validateInn } from "./validator_inn";
+import { processingDataSerchPublications } from "../../../scripts/processingDataSerchPublications";
+import { validateInn } from "./validatorInn";
 
-export function searchFunction([renderResults, setRenderResults]) {
-  const form = document.querySelector(
-      ".search__container__content--main--form--FORM"
-    ),
-    formBtnSubmit = document.querySelector(
-      ".search__container__content--main--form__container--checkbox--containerButton__container__content--btnContainer__btn"
-    );
+export function searchFunction(
+  setRenderResults,
+  formRef,
+  formBtnSubmitRef,
+  inputFormRef,
+  inputInnRef,
+  selectToneRef,
+  inputQuantityInIssueRef,
+  inputDateRange1Ref,
+  inputDateRange2Ref,
+  markerErrInnRef,
+  markerErrDateRangeRef,
+  messageErrInnRef,
+  messageErrDateRangeRef,
+  allcheckboxRef
+) {
+  const form = formRef.current;
+  const formBtnSubmit = formBtnSubmitRef.current;
 
-  const inputForm = document.querySelector(
-      ".search__container__content--main--form__container--input"
-    ),
-    inputInn = document.querySelector(
-      ".search__container__content--main--form__container--input__container--inn--input"
-    ),
-    selectTone = document.querySelector(
-      ".search__container__content--main--form__container--input__container--tone--select"
-    ),
-    inputQuantityInIssue = document.querySelector(
-      ".search__container__content--main--form__container--input__container--quantityInIssue--input"
-    ),
-    inputDateRange1 = document.querySelector(
-      ".search__container__content--main--form__container--input__container--dateRange--input1"
-    ),
-    inputDateRange2 = document.querySelector(
-      ".search__container__content--main--form__container--input__container--dateRange--input2"
-    ),
-    markerErrInn = document.querySelector(
-      ".search__container__content--main--form__container--input__container--inn--label__symbol"
-    ),
-    markerErrDateRange = document.querySelector(
-      ".search__container__content--main--form__container--input__container--dateRange--label__symbol"
-    ),
-    messageErrInn = document.querySelector(
-      ".search__container__content--main--form__container--input__container--inn--input--err"
-    ),
-    messageErrDateRange = document.querySelector(
-      ".search__container__content--main--form__container--input__container--dateRange--input--err"
-    );
+  const inputForm = inputFormRef.current;
+  const inputInn = inputInnRef.current;
+  const selectTone = selectToneRef.current;
+  const inputQuantityInIssue = inputQuantityInIssueRef.current;
+  const inputDateRange1 = inputDateRange1Ref.current;
+  const inputDateRange2 = inputDateRange2Ref.current;
+  const markerErrInn = markerErrInnRef.current;
+  const markerErrDateRange = markerErrDateRangeRef.current;
+  const messageErrInn = messageErrInnRef.current;
+  const messageErrDateRange = messageErrDateRangeRef.current;
 
   // Чекбоксы
-  const allcheckbox = document.querySelectorAll(
-    ".search__container__content--main--form__container--checkbox--containerCheckbox__container--input"
-  );
+  const allcheckbox = allcheckboxRef.current;
 
   // State
   let validValueInn = false,
@@ -205,25 +194,25 @@ export function searchFunction([renderResults, setRenderResults]) {
     let isDigest = false;
 
     // Проверка состояния чекбоксов
-    if (document.querySelector(".maxFullness").checked) {
+    if (document.querySelector(".maxFullness")?.checked) {
       maxFullness = true;
     }
-    if (document.querySelector(".inBusinessNews").checked) {
+    if (document.querySelector(".inBusinessNews")?.checked) {
       inBusinessNews = true;
     }
-    if (document.querySelector(".onlyMainRole").checked) {
+    if (document.querySelector(".onlyMainRole")?.checked) {
       onlyMainRole = true;
     }
-    if (document.querySelector(".riskFactors").checked) {
+    if (document.querySelector(".riskFactors")?.checked) {
       riskFactors = true;
     }
-    if (document.querySelector(".isTechNews").checked) {
+    if (document.querySelector(".isTechNews")?.checked) {
       isTechNews = true;
     }
-    if (document.querySelector(".isAnnouncement").checked) {
+    if (document.querySelector(".isAnnouncement")?.checked) {
       isAnnouncement = true;
     }
-    if (document.querySelector(".isDigest").checked) {
+    if (document.querySelector(".isDigest")?.checked) {
       isDigest = true;
     }
 
@@ -245,7 +234,7 @@ export function searchFunction([renderResults, setRenderResults]) {
       },
     };
 
-    processingData_SerchPublications(data);
+    processingDataSerchPublications(data);
   }
 
   form.addEventListener("submit", function (event) {

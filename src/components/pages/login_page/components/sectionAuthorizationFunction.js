@@ -1,21 +1,19 @@
-import { processingData_Authorization } from "../../../scripts/processingData_Authorization";
+import { processingDataAuthorization } from "../../../scripts/processingDataAuthorization";
 
-export function authorizationFunction(navigate) {
-  const form = document.querySelector(
-      ".authorizationForm__container__content--form--contaainerAuthorizationForm--FORM"
-    ),
-    inputLogin = document.querySelector(
-      ".authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputLoginAndPhone--Input"
-    ),
-    inputPassword = document.querySelector(
-      ".authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputPassword--Input"
-    ),
-    inputPasswordErr = document.querySelector(
-      ".authorizationForm__container__content--form--contaainerAuthorizationForm--containerInValidValues--err"
-    ),
-    formBtnSubmit = document.querySelector(
-      ".authorizationForm__container__content--form--contaainerAuthorizationForm--containerButtonSubmit__btn"
-    );
+export function authorizationFunction({
+  navigate,
+  setUserIsAuthorized,
+  formRef,
+  inputLoginRef,
+  inputPasswordRef,
+  inputPasswordErrRef,
+  formBtnSubmitRef,
+}) {
+  const form = formRef.current;
+  const inputLogin = inputLoginRef.current;
+  const inputPassword = inputPasswordRef.current;
+  const inputPasswordErr = inputPasswordErrRef.current;
+  const formBtnSubmit = formBtnSubmitRef.current;
 
   let btnDisebeld = true;
 
@@ -85,7 +83,11 @@ export function authorizationFunction(navigate) {
       password: inputPassword.value,
     };
 
-    return processingData_Authorization(userData, navigate);
+    return processingDataAuthorization({
+      userData,
+      navigate,
+      setUserIsAuthorized,
+    });
   }
 
   form.addEventListener("submit", async function (event) {

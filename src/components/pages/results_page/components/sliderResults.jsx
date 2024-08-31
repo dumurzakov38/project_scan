@@ -15,7 +15,7 @@ import "swiper/css/mousewheel";
 import strelka from "../../../../img/strelka.png";
 import loader_scan from "../../../../img/loader_scan.svg";
 
-export function Slider_results() {
+export function SliderResults() {
   const [swiperLoading, setSwiperLoading] = useState(true);
   const [containerWidth, setContainerWidth] = useState(null);
   const [slidesPerView, setSlidesPerView] = useState(6);

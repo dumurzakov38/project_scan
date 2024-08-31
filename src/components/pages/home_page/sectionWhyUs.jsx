@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Slider_whyus } from "./components/slider_whyus";
+import { SliderWhyus } from "./components/sliderWhyus";
 import time_icon_scan from "../../../img/time_icon_scan.png";
 import serch_icon_scan from "../../../img/serch_icon_scan.png";
 import security_icon_scan from "../../../img/security_icon_scan.png";
 import bg_section_whyus from "../../../img/bg_section_whyus.svg";
 
-export function Section_whyUs(params) {
+export function SectionWhyUs() {
   const Content_slider_whyus = [
     {
       img: time_icon_scan,
@@ -61,7 +61,7 @@ export function Section_whyUs(params) {
         <h1>Почему именно мы</h1>
       </div>
       <div className="section_whyus--slider">
-        <Slider_whyus data={Content_slider_whyus} />
+        <SliderWhyus data={Content_slider_whyus} />
       </div>
       <div className="section_whyus--bg">
         <img

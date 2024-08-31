@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import bg_section_notFound from "../../../img/bg_section_notFound.svg";
 
-export function Section_notFound(params) {
+export function SectionNotFound() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

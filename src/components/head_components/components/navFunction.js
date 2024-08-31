@@ -1,16 +1,14 @@
-export function navFunction(userLimitInfo, setUserLimitInfo) {
-  const numberОfUsed = document.querySelector(
-    ".nav__btn--user__info--container__limit--number__container--numberОfUsed"
-  );
-  const valueTotal = document.querySelector(
-    ".nav__btn--user__info--container__limit--number__container--valueTotal"
-  );
-  const userName = document.querySelector(
-    ".nav__btn--user__info--container__profile--text p"
-  );
-  const userAvatar = document.querySelector(
-    ".nav__btn--user__info--container__profile--img img"
-  );
+export function navFunction(
+  setUserLimitInfo,
+  numberОfUsedRef,
+  valueTotalRef,
+  userNameRef,
+  userAvatarRef
+) {
+  const numberОfUsed = numberОfUsedRef.current;
+  const valueTotal = valueTotalRef.current;
+  const userName = userNameRef.current;
+  const userAvatar = userAvatarRef.current;
 
   setInterval(() => {
     const usedCompanyCount = sessionStorage.getItem("usedCompanyCount");

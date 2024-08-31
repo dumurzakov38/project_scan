@@ -14,7 +14,7 @@ import "swiper/css/scrollbar";
 import "swiper/css/mousewheel";
 import strelka from "../../../../img/strelka.png";
 
-export function Slider_whyus({ data }) {
+export function SliderWhyus({ data }) {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLastSlide, setIsLastSlide] = useState(false);

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Card_tariff } from "./components/card_tariff";
+import { CardTariff } from "./components/cardTariff";
 
-export function Section_plans(userIsAuthorized) {
+export function SectionPlans(userIsAuthorized) {
   const [tariffData, setTariffData] = useState(() => {
     const storedTariff = localStorage.getItem("tariff");
     return storedTariff ? JSON.parse(storedTariff) : [];
@@ -55,7 +55,7 @@ export function Section_plans(userIsAuthorized) {
           </div>
           <div className="section__tariff--slider">
             <div className="section__tariff--slider__container">
-              <Card_tariff props={tariffs} />
+              <CardTariff props={tariffs} />
             </div>
           </div>
         </section>

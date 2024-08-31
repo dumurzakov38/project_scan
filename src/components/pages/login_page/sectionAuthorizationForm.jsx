@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { authorizationFunction } from "./components/section_authorizationFunction";
+import { authorizationFunction } from "./components/sectionAuthorizationFunction";
 
 import bg_section_authorizationForm from "../../../img/bg_section_authorizationForm.svg";
 import icon_authorizationForm_lock_scan from "../../../img/icon_authorizationForm_lock_scan.svg";
@@ -9,11 +9,25 @@ import google_icon from "../../../img/google_icon.svg";
 import facebook_icon from "../../../img/facebook_icon.svg";
 import yandex_icon from "../../../img/yandex_icon.svg";
 
-export function Section_authorizationForm(params) {
+export function SectionAuthorizationForm({ setUserIsAuthorized }) {
+  const formRef = useRef(null);
+  const inputLoginRef = useRef(null);
+  const inputPasswordRef = useRef(null);
+  const inputPasswordErrRef = useRef(null);
+  const formBtnSubmitRef = useRef(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    authorizationFunction(navigate);
+    authorizationFunction({
+      navigate,
+      setUserIsAuthorized,
+      formRef,
+      inputLoginRef,
+      inputPasswordRef,
+      inputPasswordErrRef,
+      formBtnSubmitRef,
+    });
     window.scrollTo(0, 0);
   }, []);
 
@@ -60,6 +74,7 @@ export function Section_authorizationForm(params) {
               </div>
               <div className="authorizationForm__container__content--form--contaainerAuthorizationForm">
                 <form
+                  ref={formRef}
                   className="authorizationForm__container__content--form--contaainerAuthorizationForm--FORM"
                   action="./login"
                   method="post"
@@ -72,6 +87,7 @@ export function Section_authorizationForm(params) {
                       Логин или номер телефона:
                     </label>
                     <input
+                      ref={inputLoginRef}
                       className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputLoginAndPhone--Input"
                       type="text"
                       name="login_and_phone"
@@ -88,6 +104,7 @@ export function Section_authorizationForm(params) {
                       Пароль:
                     </label>
                     <input
+                      ref={inputPasswordRef}
                       className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerInputPassword--Input"
                       type="password"
                       name="password"
@@ -95,12 +112,16 @@ export function Section_authorizationForm(params) {
                       autocomplete="current-password"
                       required
                     />
-                    <p className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerInValidValues--err">
+                    <p
+                      ref={inputPasswordErrRef}
+                      className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerInValidValues--err"
+                    >
                       Неправильный Логин или Пароль
                     </p>
                   </div>
                   <div className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerButtonSubmit">
                     <button
+                      ref={formBtnSubmitRef}
                       className="authorizationForm__container__content--form--contaainerAuthorizationForm--containerButtonSubmit__btn"
                       type="submit"
                       title="Войти"

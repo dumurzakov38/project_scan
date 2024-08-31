@@ -2,7 +2,7 @@ import React from "react";
 import { getYears } from "./components/getYears";
 import logo_scan from "../../img/logo_scan_white.svg";
 
-export function Footer(params) {
+export function Footer() {
   return (
     <footer>
       <div className="footer_container content">

@@ -1,15 +1,15 @@
 import React from "react";
 import { Header } from "../../head_components/header";
-import { Section_whyUs } from "./section_whyUs";
-import { Section_plans } from "./section_plans";
+import { SectionWhyUs } from "./sectionWhyUs";
+import { SectionPlans } from "./sectionPlans";
 
 export function Main({ userIsAuthorized }) {
   return (
     <>
       <Header userIsAuthorized={userIsAuthorized} />
       <main>
-        <Section_whyUs />
-        <Section_plans userIsAuthorized={userIsAuthorized} />
+        <SectionWhyUs />
+        <SectionPlans userIsAuthorized={userIsAuthorized} />
       </main>
     </>
   );
