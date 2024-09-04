@@ -1,11 +1,11 @@
-Для размещения приложения на сервере. В одной директорий с билдом приложения создать файл  .htaccess содержанием 
+### Для размещения приложения на сервере
 
-Options -MultiViews
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.html [QSA,L]
+В одной директорий с билдом приложения создать файл .htaccess с содержанием 
 
-
+1. Options -MultiViews
+2. RewriteEngine On
+3. RewriteCond %{REQUEST_FILENAME} !-f
+4. RewriteRule ^ index.html [QSA,L]
 
 Функциональные требования
 Клиентская часть сервиса состоит из:
